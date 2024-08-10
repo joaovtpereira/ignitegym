@@ -7,20 +7,26 @@ import { ComponentProps } from "react";
 
 type Props = ComponentProps<typeof GlueStackButton> & {
   title: string;
+  variant?: "solid" | "outline";
   isLoading?: boolean;
 };
 
-export function Button({ title, isLoading = false, ...rest }: Props) {
+export function Button({
+  title,
+  variant = "solid",
+  isLoading = false,
+  ...rest
+}: Props) {
   return (
     <GlueStackButton
       w={"$full"}
       h={"$14"}
-      bg={"$green700"}
-      borderWidth={"$0"}
+      bg={variant === "outline" ? "transparent" : "$green700"}
+      borderWidth={variant === "outline" ? "$1" : "$0"}
       borderColor="$green500"
       rounded={"$sm"}
       $active={{
-        backgroundColor: "$green400",
+        backgroundColor: variant === "outline" ? "$gray500" : "$green500",
       }}
       disabled={isLoading}
       {...rest}
@@ -28,7 +34,11 @@ export function Button({ title, isLoading = false, ...rest }: Props) {
       {isLoading ? (
         <ButtonSpinner color="$white" />
       ) : (
-        <Text color="$white" fontFamily="$heading" fontSize={"$sm"}>
+        <Text
+          color={variant === "outline" ? "$green500" : "$white"}
+          fontFamily="$heading"
+          fontSize={"$sm"}
+        >
           {title}
         </Text>
       )}
