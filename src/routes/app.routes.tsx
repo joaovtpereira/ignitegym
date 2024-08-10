@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationProp,
+} from "@react-navigation/bottom-tabs";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Exercise } from "@screens/exercise";
 import { History } from "@screens/history";
@@ -12,7 +15,7 @@ type AuthRoutes = {
   exercise: undefined;
 };
 
-// export type AuppNavigateRoutesProps = NativeStackNavigationProp<AuthRoutes>;
+export type AuppNavigateRoutesProps = BottomTabNavigationProp<AuthRoutes>;
 
 const { Navigator, Screen } = createBottomTabNavigator<AuthRoutes>();
 
