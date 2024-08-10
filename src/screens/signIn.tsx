@@ -11,8 +11,15 @@ import backgroundImg from "@assets/background.png";
 import Logo from "@assets/logo.svg";
 import { Input } from "@components/input";
 import { Button } from "@components/button";
+import { useNavigation } from "@react-navigation/native";
+import { AuthNavigateRoutesProps } from "@routes/routes.auth";
 
 export function SignIn() {
+  const navigation = useNavigation<AuthNavigateRoutesProps>();
+
+  function handleCreateAcount() {
+    navigation.navigate("signUp");
+  }
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
@@ -59,7 +66,11 @@ export function SignIn() {
               Ainda não tem acesso?
             </Text>
 
-            <Button title="Criar conta" variant={"outline"} />
+            <Button
+              title="Criar conta"
+              variant={"outline"}
+              onPress={handleCreateAcount}
+            />
           </Center>
         </VStack>
       </VStack>
