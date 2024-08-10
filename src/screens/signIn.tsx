@@ -1,6 +1,7 @@
 import { Image, VStack } from "@gluestack-ui/themed";
 
 import backgroundImg from "@assets/background.png";
+import logoSvg from "@assets/logo.svg";
 
 export function SignIn() {
   return (
