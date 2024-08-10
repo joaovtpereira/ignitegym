@@ -22,6 +22,7 @@ export function Group({ text, isActive, ...rest }: Props) {
           borderWidth: 1,
         },
       }}
+      marginRight={"$3"}
       {...rest}
     >
       <Text
