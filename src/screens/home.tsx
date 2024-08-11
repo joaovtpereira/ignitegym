@@ -7,6 +7,11 @@ import { FlatList } from "react-native";
 
 export function Home() {
   const [groups, setGroups] = useState(["costa", "triceps", "peito"]);
+  const [exercises, setExercises] = useState([
+    "Puxada Frontal",
+    "Remada",
+    "Levantamento frontal",
+  ]);
   const [groupSelected, setGroupSelected] = useState("costa");
 
   return (
@@ -33,7 +38,7 @@ export function Home() {
         }}
       />
 
-      <VStack paddingHorizontal="$8">
+      <VStack flex={1} paddingHorizontal="$8">
         <HStack
           justifyContent="space-between"
           marginBottom={"$5"}
@@ -44,10 +49,17 @@ export function Home() {
           </Heading>
 
           <Text color="$gray200" fontSize={"$sm"} fontFamily="$body">
-            4
+            {exercises.length}
           </Text>
         </HStack>
-        <ExerciseCard />
+
+        <FlatList
+          data={exercises}
+          keyExtractor={(exercises) => exercises}
+          renderItem={({ item }) => <ExerciseCard />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        />
       </VStack>
     </VStack>
   );
