@@ -14,7 +14,7 @@ export function HomeHeader() {
     >
       <UserPhoto
         source={{
-          uri: "https://avatars.githubusercontent.com/u/54077296?v=4&size=64",
+          uri: "https://github.com/joaovtpereira.png",
         }}
         alt="Imagem do usuário"
         w={"$16"}
