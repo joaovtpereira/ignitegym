@@ -1,7 +1,7 @@
 import { ScreenHeader } from "@components/screenHeader";
 import { UserPhoto } from "@components/userPhoto";
 import { Center, Text, VStack } from "@gluestack-ui/themed";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 
 export function Profile() {
   return (
@@ -17,6 +17,18 @@ export function Profile() {
             alt="Imagem do usuário"
             size="xl"
           />
+
+          <TouchableOpacity>
+            <Text
+              fontFamily="$heading"
+              color="$green500"
+              fontSize={"$md"}
+              marginTop={"$4"}
+              marginBottom={"$8"}
+            >
+              Alterar foto
+            </Text>
+          </TouchableOpacity>
         </Center>
       </ScrollView>
     </VStack>
