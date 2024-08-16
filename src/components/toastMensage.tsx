@@ -13,7 +13,7 @@ import { X } from "lucide-react-native";
 type Props = {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   action?: "error" | "success";
   onClose: () => void;
 };
