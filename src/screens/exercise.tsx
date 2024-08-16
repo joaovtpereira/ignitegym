@@ -5,6 +5,7 @@ import {
   Icon,
   Text,
   VStack,
+  Image,
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { AuppNavigateRoutesProps } from "@routes/app.routes";
@@ -45,6 +46,20 @@ export function Exercise() {
             </Text>
           </HStack>
         </HStack>
+      </VStack>
+
+      <VStack padding={"$8"}>
+        <Image
+          source={{
+            uri: "https://s2-oglobo.glbimg.com/WyvC_yuCqntB5JjnFP1cTdrVvpk=/0x0:1339x1181/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2022/0/j/2NMxiNQ7aFEpXwjk5aCA/exercicio004-copia.jpg",
+          }}
+          alt="Exercicio detalhado"
+          marginBottom={"$3"}
+          resizeMode="cover"
+          rounded={"$lg"}
+          w={"$full"}
+          h={"$80"}
+        />
       </VStack>
     </VStack>
   );
