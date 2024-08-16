@@ -1,7 +1,8 @@
+import { Button } from "@components/button";
 import { Input } from "@components/input";
 import { ScreenHeader } from "@components/screenHeader";
 import { UserPhoto } from "@components/userPhoto";
-import { Center, Text, VStack } from "@gluestack-ui/themed";
+import { Center, Heading, Text, VStack } from "@gluestack-ui/themed";
 import { ScrollView, TouchableOpacity } from "react-native";
 
 export function Profile() {
@@ -38,6 +39,29 @@ export function Profile() {
               bg="$gray600"
               isReadOnly
             />
+          </Center>
+
+          <Heading
+            alignSelf="flex-start"
+            fontFamily="$heading"
+            color="$gray200"
+            fontSize={"$md"}
+            marginTop={"$12"}
+            marginBottom={"$2"}
+          >
+            Alterar senha
+          </Heading>
+
+          <Center width={"$full"} gap={"$4"}>
+            <Input placeholder="Senha antiga" bg="$gray600" secureTextEntry />
+            <Input placeholder="Nova senha" bg="$gray600" secureTextEntry />
+            <Input
+              placeholder="Confirmar a nova senha"
+              bg="$gray600"
+              secureTextEntry
+            />
+
+            <Button title="Atualizar" />
           </Center>
         </Center>
       </ScrollView>
