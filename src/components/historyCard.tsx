@@ -13,12 +13,13 @@ export function HistoryCard({}: Props) {
       alignItems="center"
       justifyContent="space-between"
     >
-      <VStack marginRight={"$5"}>
+      <VStack flex={1} marginRight={"$5"}>
         <Heading
           color="$white"
           fontFamily="$heading"
           fontSize={"$md"}
           textTransform="capitalize"
+          numberOfLines={1}
         >
           Costas
         </Heading>
