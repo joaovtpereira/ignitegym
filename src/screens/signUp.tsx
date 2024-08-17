@@ -52,8 +52,7 @@ export function SignUp() {
 
   async function handleSignUp({ name, email, password }: FormDataProps) {
     try {
-      console.log("hi");
-      await fetch("http://192.168.100.219:3333/users", {
+      const response = await fetch("http://192.168.100.219:3333/users", {
         //ip maquina
         method: "POST",
         headers: {
@@ -62,6 +61,10 @@ export function SignUp() {
         },
         body: JSON.stringify({ name, email, password }),
       });
+
+      const data = await response.json();
+
+      console.log({ data });
     } catch (error) {
       console.log({ error });
     }
