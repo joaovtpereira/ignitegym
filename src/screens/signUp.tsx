@@ -50,8 +50,21 @@ export function SignUp() {
     navigation.goBack();
   }
 
-  function handleSignUp(data: FormDataProps) {
-    console.log({ data });
+  async function handleSignUp({ name, email, password }: FormDataProps) {
+    try {
+      console.log("hi");
+      await fetch("http://192.168.100.219:3333/users", {
+        //ip maquina
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+    } catch (error) {
+      console.log({ error });
+    }
   }
 
   return (
@@ -86,7 +99,6 @@ export function SignUp() {
               render={({ field: { onChange, value } }) => (
                 <Input
                   placeholder="Nome"
-                  secureTextEntry
                   onChangeText={onChange}
                   value={value}
                   errorMensage={errors.name?.message}
