@@ -26,8 +26,14 @@ type FormDataProps = {
 const signUpSchema = yup.object({
   name: yup.string().required("Informe o nome"),
   email: yup.string().required("Informe o email").email("E-mail inválido"),
-  password: yup.string().required("Informe a senha"),
-  confirm_password: yup.string().required("Informe a senah"),
+  password: yup
+    .string()
+    .required("Informe a senha")
+    .min(6, "A senha deve ter no mínimo 6 dígitos"),
+  confirm_password: yup
+    .string()
+    .required("Confirme a senha")
+    .oneOf([yup.ref("password"), ""], "A confirmação da senha não confere."),
 });
 
 export function SignUp() {
@@ -112,6 +118,7 @@ export function SignUp() {
                   secureTextEntry
                   onChangeText={onChange}
                   value={value}
+                  errorMensage={errors.password?.message}
                 />
               )}
             />
@@ -127,6 +134,7 @@ export function SignUp() {
                   value={value}
                   onSubmitEditing={handleSubmit(handleSignUp)}
                   returnKeyType="send"
+                  errorMensage={errors.confirm_password?.message}
                 />
               )}
             />
