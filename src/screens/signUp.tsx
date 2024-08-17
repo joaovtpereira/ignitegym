@@ -4,6 +4,7 @@ import {
   Image,
   ScrollView,
   Text,
+  useToast,
   VStack,
 } from "@gluestack-ui/themed";
 
@@ -16,8 +17,9 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "@services/api";
-import axios from "axios";
-import { Alert } from "react-native";
+
+import { AppError } from "@utils/AppError";
+import { ToastMessage } from "@components/toastMensage";
 
 type FormDataProps = {
   name: string;
@@ -40,6 +42,7 @@ const signUpSchema = yup.object({
 });
 
 export function SignUp() {
+  const toast = useToast();
   const navigation = useNavigation();
   const {
     control,
@@ -57,10 +60,22 @@ export function SignUp() {
     try {
       const response = await api.post("/users", { name, email, password });
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.log({ error: error.response?.data?.message });
-        Alert.alert(error.response?.data?.message);
-      }
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : "Não foi possível criar conta.";
+
+      toast.show({
+        placement: "top",
+        render: ({ id }) => (
+          <ToastMessage
+            id={id}
+            action="error"
+            title={title}
+            onClose={() => toast.close(id)}
+          />
+        ),
+      });
     }
   }
 
