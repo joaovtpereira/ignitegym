@@ -4,6 +4,8 @@ import {
   Image,
   ScrollView,
   Text,
+  ToastTitle,
+  useToast,
   VStack,
 } from "@gluestack-ui/themed";
 
@@ -17,6 +19,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "@hooks/useAuth";
+import { AppError } from "@utils/AppError";
+import { ToastMessage } from "@components/toastMensage";
 
 type FormDataProps = {
   email: string;
@@ -32,6 +36,7 @@ const signUpSchema = yup.object({
 });
 
 export function SignIn() {
+  const toast = useToast();
   const { signIn } = useAuth();
   const navigation = useNavigation<AuthNavigateRoutesProps>();
   const {
@@ -51,6 +56,21 @@ export function SignIn() {
       await signIn(email, password);
     } catch (error) {
       console.log({ error });
+      const isAppError = error instanceof AppError;
+
+      const title = isAppError ? error.message : "Não foi possível entrar.";
+
+      toast.show({
+        placement: "top",
+        render: ({ id }) => (
+          <ToastMessage
+            id={id}
+            action="error"
+            title={title}
+            onClose={() => toast.close(id)}
+          />
+        ),
+      });
     }
   }
 
