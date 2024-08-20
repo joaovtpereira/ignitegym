@@ -17,7 +17,16 @@ export default function App() {
         translucent
         backgroundColor={"transparent"}
       />
-      <AuthContext.Provider value={{}}>
+      <AuthContext.Provider
+        value={{
+          user: {
+            name: "Joao",
+            id: "1",
+            email: "joao@gmail.com",
+            avatar: "https://github.com/joaovtpereira.png",
+          },
+        }}
+      >
         {fontsLoaded ? <Routes /> : <Loading />}
       </AuthContext.Provider>
     </GluestackUIProvider>
