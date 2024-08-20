@@ -5,6 +5,7 @@ import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { StatusBar } from "react-native";
 import { config } from "./config/gluestack-ui.config"; //using config eject by gluestack
 import { Routes } from "@routes/index";
+import { AuthContext } from "@contexts/authContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_700Bold, Roboto_400Regular });
@@ -16,8 +17,9 @@ export default function App() {
         translucent
         backgroundColor={"transparent"}
       />
-
-      {fontsLoaded ? <Routes /> : <Loading />}
+      <AuthContext.Provider value={{}}>
+        {fontsLoaded ? <Routes /> : <Loading />}
+      </AuthContext.Provider>
     </GluestackUIProvider>
   );
 }
