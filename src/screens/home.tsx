@@ -2,12 +2,14 @@ import { ExerciseCard } from "@components/exerciseCard";
 import { Group } from "@components/group";
 import { HomeHeader } from "@components/homeHeader";
 import { Center, Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
+import { useAuth } from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { AuppNavigateRoutesProps } from "@routes/app.routes";
 import { useState } from "react";
 import { FlatList } from "react-native";
 
 export function Home() {
+  const { user } = useAuth();
   const navigation = useNavigation<AuppNavigateRoutesProps>();
 
   const [groups, setGroups] = useState(["costa", "triceps", "peito"]);
@@ -24,7 +26,7 @@ export function Home() {
 
   return (
     <VStack flex={1}>
-      <HomeHeader />
+      <HomeHeader userName={user.name} />
 
       <FlatList
         data={groups}

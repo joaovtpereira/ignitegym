@@ -2,7 +2,11 @@ import { Heading, HStack, Text, VStack, Icon } from "@gluestack-ui/themed";
 import { UserPhoto } from "./userPhoto";
 import { LogOut } from "lucide-react-native";
 
-export function HomeHeader() {
+type HomeHeaderProps = {
+  userName: string;
+};
+
+export function HomeHeader({ userName }: HomeHeaderProps) {
   return (
     <HStack
       backgroundColor="$gray600"
@@ -25,7 +29,7 @@ export function HomeHeader() {
           Olá,
         </Text>
         <Heading color="$gray100" fontSize={"$md"}>
-          João Vitor
+          {userName}
         </Heading>
       </VStack>
 

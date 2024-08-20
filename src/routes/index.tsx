@@ -1,12 +1,10 @@
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { AuthRoutes } from "./routes.auth";
-import { gluestackUIConfig } from "../../config/gluestack-ui.config";
-import { Box } from "@gluestack-ui/themed";
-import { AppRoutes } from "./app.routes";
-import { useContext } from "react";
-import { AuthContext } from "@contexts/authContext";
-import { useAuth } from "@hooks/useAuth";
 import { Loading } from "@components/loading";
+import { Box } from "@gluestack-ui/themed";
+import { useAuth } from "@hooks/useAuth";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { gluestackUIConfig } from "../../config/gluestack-ui.config";
+import { AppRoutes } from "./app.routes";
+import { AuthRoutes } from "./routes.auth";
 
 export function Routes() {
   const { user, isLoadingUserStorageData } = useAuth();
