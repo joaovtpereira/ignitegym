@@ -21,6 +21,7 @@ import * as yup from "yup";
 import { useAuth } from "@hooks/useAuth";
 import { AppError } from "@utils/AppError";
 import { ToastMessage } from "@components/toastMensage";
+import { useState } from "react";
 
 type FormDataProps = {
   email: string;
@@ -47,14 +48,18 @@ export function SignIn() {
     resolver: yupResolver(signUpSchema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   function handleCreateAcount() {
     navigation.navigate("signUp");
   }
 
   async function handleSignIn({ email, password }: FormDataProps) {
     try {
+      setIsLoading(true);
       await signIn(email, password);
     } catch (error) {
+      setIsLoading(false);
       console.log({ error });
       const isAppError = error instanceof AppError;
 
@@ -126,7 +131,11 @@ export function SignIn() {
               )}
             />
 
-            <Button title="Acessar" onPress={handleSubmit(handleSignIn)} />
+            <Button
+              title="Acessar"
+              onPress={handleSubmit(handleSignIn)}
+              isLoading={isLoading}
+            />
           </Center>
 
           <Center flex={1} justifyContent="flex-end" mt={"$4"}>
