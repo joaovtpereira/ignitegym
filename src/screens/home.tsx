@@ -26,7 +26,7 @@ export function Home() {
 
   return (
     <VStack flex={1}>
-      <HomeHeader userName={user.name} />
+      <HomeHeader userName={user.name} userAvatar={user.avatar} />
 
       <FlatList
         data={groups}
