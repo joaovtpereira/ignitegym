@@ -1,6 +1,10 @@
 import { UserDTO } from "@dtos/UserDTO";
 import { api } from "@services/api";
-import { storageTokenGet, storageTokenSave } from "@storage/storageAuthToken";
+import {
+  clearStorageToken,
+  storageTokenGet,
+  storageTokenSave,
+} from "@storage/storageAuthToken";
 import {
   clearStorageUser,
   storageUserGet,
@@ -70,6 +74,7 @@ export function AuthContextProvider({ children }: AuthContextPRoviderPRops) {
       setIsLoadingUserStorageData(true);
       setUser({} as UserDTO);
       await clearStorageUser();
+      await clearStorageToken();
     } catch (error) {
       throw error;
     } finally {
