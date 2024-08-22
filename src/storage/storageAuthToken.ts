@@ -12,8 +12,7 @@ export async function storageTokenSave(token: string) {
 
 export async function storageTokenGet() {
   try {
-    const storage = await AsyncStorage.getItem(TOKEN_STORAGE);
-    const token: string = storage ? storage : "";
+    const token = await AsyncStorage.getItem(TOKEN_STORAGE);
 
     return token;
   } catch (error) {

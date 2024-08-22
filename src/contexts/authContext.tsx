@@ -1,6 +1,6 @@
 import { UserDTO } from "@dtos/UserDTO";
 import { api } from "@services/api";
-import { storageTokenSave } from "@storage/storageAuthToken";
+import { storageTokenGet, storageTokenSave } from "@storage/storageAuthToken";
 import {
   clearStorageUser,
   storageUserGet,
@@ -28,19 +28,22 @@ export function AuthContextProvider({ children }: AuthContextPRoviderPRops) {
   const [isLoadingUserStorageData, setIsLoadingUserStorageData] =
     useState(true);
 
-  async function storageUserAndToken(userData: UserDTO, token: string) {
+  async function UserAndTokenUpdate(userData: UserDTO, token: string) {
     try {
-      setIsLoadingUserStorageData(true);
-      await storageUserSave(userData);
-      await storageTokenSave(token);
-
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       setUser(userData);
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoadingUserStorageData(false);
+    }
+  }
+
+  async function UserAndTokenStorageData(userData: UserDTO, token: string) {
+    try {
+      await storageUserSave(userData);
+      await storageTokenSave(token);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -49,10 +52,16 @@ export function AuthContextProvider({ children }: AuthContextPRoviderPRops) {
       const { data } = await api.post("/sessions", { email, password });
 
       if (data.user && data.token) {
-        await storageUserAndToken(data.user, data.token);
+        setIsLoadingUserStorageData(true);
+
+        await UserAndTokenStorageData(data.user, data.token);
+
+        await UserAndTokenUpdate(data.user, data.token);
       }
     } catch (error) {
       throw error;
+    } finally {
+      setIsLoadingUserStorageData(false);
     }
   }
 
@@ -70,10 +79,12 @@ export function AuthContextProvider({ children }: AuthContextPRoviderPRops) {
 
   async function loadUserData() {
     try {
+      setIsLoadingUserStorageData(true);
       const userLogged = await storageUserGet();
+      const userLoggedtoken = await storageTokenGet();
 
-      if (userLogged) {
-        setUser(userLogged);
+      if (userLogged && userLoggedtoken) {
+        UserAndTokenUpdate(userLogged, userLoggedtoken);
       }
     } catch (error) {
       throw error;
