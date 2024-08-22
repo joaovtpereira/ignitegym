@@ -111,6 +111,8 @@ export function SignIn() {
               render={({ field: { onChange, value } }) => (
                 <Input
                   placeholder="E-mail"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
                   onChangeText={onChange}
                   value={value}
                   errorMensage={errors.email?.message}
@@ -124,6 +126,7 @@ export function SignIn() {
               render={({ field: { onChange, value } }) => (
                 <Input
                   placeholder="Senha"
+                  secureTextEntry
                   onChangeText={onChange}
                   value={value}
                   errorMensage={errors.password?.message}
