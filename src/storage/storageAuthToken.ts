@@ -1,0 +1,30 @@
+import { UserDTO } from "@dtos/UserDTO";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TOKEN_STORAGE } from "./storageConfig";
+
+export async function storageTokenSave(token: string) {
+  try {
+    await AsyncStorage.setItem(TOKEN_STORAGE, token);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function storageTokenGet() {
+  try {
+    const storage = await AsyncStorage.getItem(TOKEN_STORAGE);
+    const token: string = storage ? storage : "";
+
+    return token;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function clearStorageToken() {
+  try {
+    await AsyncStorage.removeItem(TOKEN_STORAGE);
+  } catch (error) {
+    throw error;
+  }
+}
